@@ -8,10 +8,8 @@ Created on Fri Jun 28 16:21:44 2019
 
 
 import numpy as np
-from time import time
 
-# numpy compact
-
+# standard input
 # =============================================================================
 # def mandelbrot_set(xmin,xmax,ymin,ymax,width,height,maxiter):
 #     x = np.linspace(xmin, xmax, width)
@@ -30,14 +28,13 @@ from time import time
 #     return np.where(z.mask, mset, maxiter)
 # =============================================================================
 
-def mandelbrot_set(xmin,xmax,ymin,ymax,width,height,maxiter):
-    x = np.linspace(xmin, xmax, width)
-    y = np.linspace(ymin, ymax, height)
-    x,y = np.meshgrid(x,y)
-    z = x + y * 1j
-    c = np.array(z)
-    z = np.ma.array(z, mask=np.zeros(z.shape))
-    mset = np.zeros(z.shape, dtype=int)
+def mandelbrot_set(x,y,size,resolution,maxiter):
+    re = np.linspace(x-size/2, x+size/2, resolution)
+    im = np.linspace(y-size/2, y+size/2, resolution)
+    re,im = np.meshgrid(re,im)
+    c = re + im * 1j
+    z = np.ma.array(c.copy(), mask=np.zeros(c.shape))
+    mset = np.zeros(c.shape, dtype=int)
     
     for i in range(maxiter):
         sel = ~z.mask & (z > 2)
