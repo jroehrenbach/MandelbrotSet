@@ -5,8 +5,6 @@ Created on Fri Jun 28 16:21:44 2019
 @author: jakob
 """
 
-
-
 import numpy as np
 
 # standard input
@@ -43,3 +41,4 @@ def mandelbrot_set(x,y,size,resolution,maxiter):
         z[~z.mask] = z[~z.mask]**2 + c[~z.mask]
     
     return np.where(z.mask, mset, maxiter)
+
