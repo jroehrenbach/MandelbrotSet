@@ -26,9 +26,11 @@ import numpy as np
 #     return np.where(z.mask, mset, maxiter)
 # =============================================================================
 
-def mandelbrot_set(x,y,size,resolution,maxiter):
-    re = np.linspace(x-size/2, x+size/2, resolution)
-    im = np.linspace(y-size/2, y+size/2, resolution)
+def mandelbrot_set(pos,size,resolution,maxiter):
+    # NOTE: switched position for im and re because result incorrect
+    #       -> investigate later
+    im = np.linspace(pos[0]-size/2, pos[0]+size/2, resolution)
+    re = np.linspace(pos[1]-size/2, pos[1]+size/2, resolution)
     re,im = np.meshgrid(re,im)
     c = re + im * 1j
     z = np.ma.array(c.copy(), mask=np.zeros(c.shape))
